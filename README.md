@@ -71,6 +71,12 @@ aws s3api create-bucket --bucket kops-spoo-storage --region us-east-1
 kops create cluster --name=k8scluster.k8s.local --state=s3://kops-spoo-storage --zones=us-east-1a --node-count=1 --node-size=t2.micro --master-size=t2.micro  --master-volume-size=8 --node-volume-size=8
 ```
 
+### Important: Create Hosted Zone in Route53.
+
+```
+aws route53 created-hosted-zone --name dev.devopsprojects.ca --caller-reference 1
+```
+
 ### Important: Edit the configuration as there are multiple resources created which won't fall into the free tier.
 
 ```
@@ -88,6 +94,11 @@ This will take a few minutes to create............
 After a few mins, run the below command to verify the cluster installation.
 
 ```
-kops validate cluster k8scluster.k8s.local
+kops validate cluster k8scluster.k8s.local --state=s3://kops-spoo-storage
 ```
 
+To delete the cluster.
+
+```
+kops delete cluster k8scluster.k8s.local --state=s3://kops-spoo-storage
+```

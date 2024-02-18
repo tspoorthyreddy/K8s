@@ -100,5 +100,5 @@ kops validate cluster k8scluster.k8s.local --state=s3://kops-spoo-storage
 To delete the cluster.
 
 ```
-kops delete cluster k8scluster.k8s.local --state=s3://kops-spoo-storage
+kops delete cluster k8scluster.k8s.local --state=s3://kops-spoo-storage --yes
 ```
